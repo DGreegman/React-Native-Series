@@ -8,6 +8,7 @@ const topics = [
     {id: 2, name: 'SectionList', screen:'SectionList'},
     {id: 3, name: 'Modal', screen:'Modal'},
     {id: 4, name: 'PullToRefresh', screen:'PullToRefresh'},
+    {id: 5, name: 'DataFetching', screen:'DataFetching'},
 ]
 type HomeScreenNavigationProps = StackNavigationProp<RootStackParamsList, 'Home'>
 

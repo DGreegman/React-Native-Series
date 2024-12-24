@@ -1,16 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SectionList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './screens/HomeScreen'
-import StackNavigation from './components/stack/StackNavigation'
-import TabsNavigationDemo from './components/tabs/TabsNavigationDemo'
-import DrawerNavigationDemo from './components/drawer/DrawerNavigationDemo'
+import FlatListScreen from './screens/FlatListScreen'
+import SectionListScreen from './screens/SectionListScreen'
+import ModalScreen from './screens/ModalScreen'
+import PullToRefresh from './screens/PullToRefresh'
 
 export type RootStackParamsList = {
     Home: undefined;
-    StackDemoPage: undefined;
-    TabDemo: undefined;
-    Drawer: undefined;
+    FlatList: undefined;
+    SectionList: undefined;
+    Modal: undefined;
+    PullToRefresh: undefined;
 }
 
 const Stack = createStackNavigator<RootStackParamsList>()
@@ -18,9 +20,11 @@ const RootNavigator:React.FC = () => {
   return (
    <Stack.Navigator>
         <Stack.Screen name='Home' component={HomeScreen}/>
-        <Stack.Screen name='StackDemoPage' component={StackNavigation}/>
-        <Stack.Screen name='TabDemo' component={TabsNavigationDemo}/>
-        <Stack.Screen name='Drawer' component={DrawerNavigationDemo}/>
+        <Stack.Screen name='FlatList' component={FlatListScreen}/>
+        <Stack.Screen name='SectionList' component={SectionListScreen}/>
+        <Stack.Screen name='Modal' component={ModalScreen}/> 
+        <Stack.Screen name='PullToRefresh' component={PullToRefresh}/>
+
    </Stack.Navigator>
   )
 }

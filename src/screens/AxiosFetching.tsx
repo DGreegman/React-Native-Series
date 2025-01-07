@@ -6,37 +6,50 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import axios from 'axios';
+import {Posts} from './DataFetching';
 
-export interface Posts {
-  id: number;
-  title: string;
-}
-const DataFetching = () => {
-  const [posts, setPosts] = React.useState<Posts[]>([]);
-  const [loading, setLoading] = React.useState(true);
+// servile file => import
+// axios instance
 
-  const fetchPosts = async () => {
+const api = axios.create({
+  baseURL: 'https://jsonplaceholder.typicode.com',
+});
+
+// request interceptor
+api.interceptors.request.use(config => {
+  console.log('Request was sent');
+  return config;
+});
+
+// response interceptor
+api.interceptors.response.use(response => {
+  console.log('Response was received');
+  return response;
+});
+const AxiosFetching = () => {
+  const [data, setData] = React.useState<Posts[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const fetchListOfPosts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts',
-      );
-      const data: Posts[] = await response.json();
-      if (data) {
-        setPosts(data);
+      const response = await api.get<Posts[]>('/posts');
+      if (response.status === 200) {
+        setData(response.data);
         setLoading(false);
       } else {
-        setPosts([]);
+        setData([]);
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  React.useEffect(() => {
-    fetchPosts();
-  }, []);
 
+  React.useEffect(() => {
+    fetchListOfPosts();
+  }, []);
   const renderItem = ({item}: {item: Posts}) => {
     return (
       <View
@@ -60,7 +73,7 @@ const DataFetching = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <FlatList
-          data={posts}
+          data={data}
           keyExtractor={item => item.id.toString()}
           renderItem={renderItem}
         />
@@ -69,6 +82,6 @@ const DataFetching = () => {
   );
 };
 
-export default DataFetching;
+export default AxiosFetching;
 
 const styles = StyleSheet.create({});

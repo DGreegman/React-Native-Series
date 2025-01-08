@@ -1,23 +1,11 @@
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList} from '../RootNavigator';
 
 const topics = [
-  {id: 1, name: 'React', screen: 'FlatList'},
-  {id: 2, name: 'SectionList', screen: 'SectionList'},
-  {id: 3, name: 'Modal', screen: 'Modal'},
-  {id: 4, name: 'PullToRefresh', screen: 'PullToRefresh'},
-  {id: 5, name: 'DataFetching', screen: 'DataFetching'},
-  {id: 6, name: 'AxiosFetching', screen: 'AxiosFetching'},
-  {id: 7, name: 'ThemeScreen', screen: 'ThemeScreen'},
+  // {id: 1, name: 'React', screen: 'FlatList'},
+  {id: 2, name: 'BasicAnimation', screen: 'BasicAnimation'},
 ];
 type HomeScreenNavigationProps = StackNavigationProp<
   RootStackParamsList,

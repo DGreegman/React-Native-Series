@@ -13,6 +13,9 @@ const BasicAnimation = () => {
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const translateAnim = useRef(new Animated.Value(0)).current;
     const scaleAnim = useRef(new Animated.Value(1)).current;
+    const rotateAnim = useRef(new Animated.Value(1)).current;
+    const springAnim = useRef(new Animated.Value(0)).current;
+    const bounceAnim = useRef(new Animated.Value(0)).current;
 
     const handleFadeIn = () => {
         Animated.timing(fadeAnim, {
@@ -49,6 +52,44 @@ const BasicAnimation = () => {
             Animated.timing(scaleAnim, {
                 toValue: 1,
                 duration: 500,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    };
+    const handleRotate = () => {
+        Animated.timing(rotateAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+        }).start(() => {
+            rotateAnim.setValue(0);
+        });
+    };
+
+    const spin = rotateAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+    });
+
+    const handleSpring = () => {
+        Animated.spring(springAnim, {
+            toValue: 100,
+            friction: 5,
+            tension: 40,
+            useNativeDriver: true,
+        }).start(() => {
+            springAnim.setValue(0);
+        });
+    };
+
+    const handleBounce = () => {
+        Animated.sequence([
+            Animated.spring(bounceAnim, {
+                toValue: -20,
+                useNativeDriver: true,
+            }),
+            Animated.spring(bounceAnim, {
+                toValue: 0,
                 useNativeDriver: true,
             }),
         ]).start();
@@ -111,6 +152,59 @@ const BasicAnimation = () => {
                     ]}></Animated.View>
                 <Button title="Scale" onPress={handleScale} />
             </View>
+
+            {/* Rotate Animation demo */}
+            <Text style={styles.headerText}>Rotate Animation Demo</Text>
+            <View style={styles.demoContainer}>
+                <Animated.View
+                    style={[
+                        styles.box,
+                        styles.rotateBox,
+                        {
+                            transform: [
+                                {
+                                    rotate: spin,
+                                },
+                            ],
+                        },
+                    ]}></Animated.View>
+                <Button title="Rotate" onPress={handleRotate} />
+            </View>
+            {/* Spring Animation demo */}
+            <Text style={styles.headerText}>Spring Animation Demo</Text>
+            <View style={styles.demoContainer}>
+                <Animated.View
+                    style={[
+                        styles.box,
+                        styles.springBox,
+                        {
+                            transform: [
+                                {
+                                    translateX: springAnim,
+                                },
+                            ],
+                        },
+                    ]}></Animated.View>
+                <Button title="Rotate" onPress={handleSpring} />
+            </View>
+
+            {/* Bounce Animation demo */}
+            <Text style={styles.headerText}>Spring Animation Demo</Text>
+            <View style={styles.demoContainer}>
+                <Animated.View
+                    style={[
+                        styles.box,
+                        styles.bounceBox,
+                        {
+                            transform: [
+                                {
+                                    translateY: bounceAnim,
+                                },
+                            ],
+                        },
+                    ]}></Animated.View>
+                <Button title="Bounce" onPress={handleBounce} />
+            </View>
         </ScrollView>
     );
 };
@@ -165,5 +259,14 @@ const styles = StyleSheet.create({
     },
     scaleBox: {
         backgroundColor: 'red',
+    },
+    rotateBox: {
+        backgroundColor: 'blue',
+    },
+    springBox: {
+        backgroundColor: 'green',
+    },
+    bounceBox: {
+        backgroundColor: 'purple',
     },
 });

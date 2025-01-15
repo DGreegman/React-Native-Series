@@ -7,6 +7,8 @@ const topics = [
     // {id: 1, name: 'React', screen: 'FlatList'},
     {id: 2, name: 'BasicAnimation', screen: 'BasicAnimation'},
     {id: 3, name: 'Interpolation', screen: 'Interpolation'},
+    {id: 4, name: 'Combined', screen: 'Combined'},
+    {id: 5, name: 'Gesture', screen: 'Gesture'},
 ];
 type HomeScreenNavigationProps = StackNavigationProp<
     RootStackParamsList,
@@ -61,5 +63,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'blue',
         borderRadius: 5,
         marginVertical: 5,
+        color: '#fff',
     },
 });

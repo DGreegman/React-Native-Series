@@ -11,6 +11,7 @@ const topics = [
     {id: 5, name: 'Gesture', screen: 'Gesture'},
     {id: 6, name: 'Reanimated', screen: 'Reanimated'},
     {id: 7, name: 'ReanimatedTypes', screen: 'ReanimatedTypes'},
+    {id: 8, name: 'ReanimatedGesture', screen: 'ReanimatedGesture'},
 ];
 type HomeScreenNavigationProps = StackNavigationProp<
     RootStackParamsList,

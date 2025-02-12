@@ -9,6 +9,7 @@ import CombinedAnimation from './screens/CombinedAnimation';
 import Reanimated from './screens/Reanimated';
 import ReanimatedTypes from './screens/ReanimatedTypes';
 import ReanimatedGesture from './screens/ReanimatedGesture';
+import ReanimatedForm from './screens/ReanimatedForm';
 
 export type RootStackParamsList = {
     Home: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamsList = {
     Reanimated: undefined;
     ReanimatedTypes: undefined;
     ReanimatedGesture: undefined;
+    ReanimatedForm: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamsList>();
@@ -36,6 +38,7 @@ const RootNavigator: React.FC = () => {
                 name="ReanimatedGesture"
                 component={ReanimatedGesture}
             />
+            <Stack.Screen name="ReanimatedForm" component={ReanimatedForm} />
         </Stack.Navigator>
     );
 };
